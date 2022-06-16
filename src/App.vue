@@ -1,30 +1,40 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
+  <header :class="$style.header" class="bg-blue-500">
+    <div class="_container py-5 flex align-items-center">
+      <router-link to="Dashbord" class="text-4xl text-white uppercase" :class="$style.link">family-accounting</router-link>
+      <router-link to="Dashbord" class="text-lg ml-4" :class="$style.link">Дашборд</router-link>
+      <router-link to="/" class="text-lg ml-4" :class="$style.link">Операции</router-link>
+      <Button label = "Добавить операцию"  @click="isShow = !isShow" class="ml-auto"/>
+    </div>
+  </header>
   <router-view/>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
+  import Button from "primevue/button"
+  import {ref} from "@vue/reactivity"
 
-nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
+export default{
+  components:{
+    Button
+  },
+  setup(){
+    const isShow = ref();
   }
 }
+
+</script>
+
+<style lang="scss" module>
+  .header{
+    position: relative;
+  }
+  
+  .link{
+    color: #fff;
+    
+    &hover{
+      color: #ddd;
+    }
+  }
 </style>
