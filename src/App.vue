@@ -90,6 +90,7 @@
   import {reactive, ref} from "@vue/reactivity"
   import {useVuelidate} from "@vuelidate/core"
   import {required} from "@vuelidate/validators"
+  import { useStore } from "vuex"
 
   import Button from "primevue/button"
   import Sidebar from "primevue/sidebar"
@@ -111,16 +112,22 @@ export default{
     Dropdown
   },
   setup(){
-    const isShow = ref(false);
-    const model = reactive(
-      {
+    const store = useStore();
+
+    const defaultModel = {
         date: null,
         place: null,
         category: null,
         amount: null,
         card: null,
         description: null
-     });
+     };
+
+
+    const data = reactive(JSON.parse(localStorage.getItem('data') || "[]"));
+    store.commit('setData', data);
+    const isShow = ref(false);
+    const model = ref({...defaultModel});
 
     const cards = [
       {value: '*5379', label: 'Alpha'},
@@ -141,13 +148,19 @@ export default{
     function handleSubmit(invalid){
       v$.value.$touch();
       if(!invalid){
-        console.log('Invalid');
         return
       }
-      console.log("Valid");      
+      v$.value.$reset();
+      data.push(model.value);
+      model.value = {...defaultModel};
+      store.commit('setData', data);
+      localStorage.setItem('data', JSON.stringify(data));      
     }
+
+
+
     return {
-      isShow, v$, handleSubmit,cards
+      isShow, v$, handleSubmit,cards, data
     }
   },
 }

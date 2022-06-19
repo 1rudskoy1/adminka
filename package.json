@@ -10,10 +10,12 @@
     "@vuelidate/core": "^2.0.0-alpha.41",
     "@vuelidate/validators": "^2.0.0-alpha.29",
     "core-js": "^3.8.3",
+    "dateformat": "^5.0.3",
     "primeflex": "^3.2.1",
     "primeicons": "^5.0.0",
     "primevue": "^3.15.0",
     "vue": "^3.2.13",
+    "vue-date-format": "^1.1.2",
     "vue-router": "^4.0.3",
     "vuelidate": "^0.7.7",
     "vuex": "^4.0.0"
